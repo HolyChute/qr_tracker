@@ -47,20 +47,6 @@
       line-height: 1.6;
     }
 
-    .important {
-      color: #ff4d4d;
-      font-weight: bold;
-    }
-
-    .visitor-counter {
-      background-color: #ffedcc;
-      padding: 10px;
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-      border-radius: 5px;
-    }
-
     footer {
       text-align: center;
       padding: 10px;
@@ -71,64 +57,14 @@
       width: 100%;
     }
   </style>
+
+  <!-- Google Analytics GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XWXC1KH3GB"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XWXC1KH3GB');
-  </script>
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script>
-    // Load the Google API client library
-    function loadGAPI() {
-      gapi.load('client', initializeAnalytics);
-    }
-
-    // Initialize the Analytics API
-    async function initializeAnalytics() {
-      await gapi.client.init({
-        apiKey: '761f70560b9daf8cfeb762133255271858c26f6b', // Replace with your actual API key
-        discoveryDocs: ['https://analyticsdata.googleapis.com/$discovery/rest?version=v1beta']
-      });
-
-      queryVisitorCount();
-    }
-
-    // Query the Analytics API (updated for GA4)
-    async function queryVisitorCount() {
-  try {
-    const response = await gapi.client.analyticsdata.runReport({
-      property: 'properties/468656363', // Replace with your actual GA4 property ID
-      requestBody: {
-        dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
-        metrics: [{ name: 'screenPageViews' }], // Metric for GA4
-        dimensions: [{ name: 'pagePath' }] // Dimension for GA4
-      }
-    });
-
-    // Extract visitor count from the response
-    const rows = response.result.rows || [];
-    let totalViews = 0;
-
-    rows.forEach(row => {
-      totalViews += parseInt(row.metricValues[0].value, 10); // Sum up page views
-    });
-
-    document.getElementById('visitorCount').textContent = totalViews || '0';
-
-  } catch (error) {
-    console.error("Error fetching visitor count:", error);
-    document.getElementById('visitorCount').textContent = "Error";
-  }
-}
-
-    // Load the GAPI library
-    gapi.load('client', loadGAPI);
-
-    // Refresh data every 60 seconds
-    setInterval(queryVisitorCount, 60000);
+    gtag('config', 'G-XWXC1KH3GB'); // Replace with your Measurement ID
   </script>
 </head>
 
@@ -138,11 +74,6 @@
     <p>You may have scanned a fraudulent QR code. Stay safe and read below for guidance.</p>
   </header>
   <main>
-    <div class="visitor-counter">
-      <p><strong>Visitor Counter:</strong> You are visitor #<span id="visitorCount">Loading...</span>
-      </p>
-    </div>
-
     <h2>What Are QR Code Scams?</h2>
     <p>QR code scams involve the use of fake QR codes to deceive people into visiting fraudulent websites or downloading
       malicious content. Scammers often place counterfeit QR codes on parking meters, signs, or other public locations to
@@ -198,5 +129,4 @@
     <p>© 2024 QR Code Scam Awareness | Stay Safe Online</p>
   </footer>
 </body>
-
 </html>

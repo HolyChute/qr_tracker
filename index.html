@@ -47,6 +47,15 @@
       line-height: 1.6;
     }
 
+    .visitor-counter {
+      background-color: #ffedcc;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+    }
+
     footer {
       text-align: center;
       padding: 10px;
@@ -57,7 +66,9 @@
       width: 100%;
     }
   </style>
- <script type="module">
+
+  <!-- Firebase SDKs -->
+  <script type="module">
     // Import the functions you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
     import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
@@ -100,9 +111,10 @@
     <p>You may have scanned a fraudulent QR code. Stay safe and read below for guidance.</p>
   </header>
   <main>
-    div class="visitor-counter">
+    <div class="visitor-counter">
       <p id="visitorCount">Visitors: Loading...</p>
     </div>
+
     <h2>What Are QR Code Scams?</h2>
     <p>QR code scams involve the use of fake QR codes to deceive people into visiting fraudulent websites or downloading
       malicious content. Scammers often place counterfeit QR codes on parking meters, signs, or other public locations to
@@ -122,37 +134,6 @@
         severity of financial scams.</li>
     </ul>
     <p>These scams are increasingly targeting parking and payment systems, making vigilance essential.</p>
-
-    <h2>How QR Code Scams Work</h2>
-    <p>Understanding the technical details can help you stay alert:</p>
-    <ul>
-      <li>Scammers generate fake QR codes and place them over legitimate ones on parking machines or signs.</li>
-      <li>These codes redirect users to fraudulent websites that mimic legitimate payment portals.</li>
-      <li>QR codes themselves cannot verify the legitimacy of the linked content, so caution is required.</li>
-    </ul>
-
-    <h2>What to Look Out For and How to Avoid QR Code Scams</h2>
-    <p>Here are some simple tips to help you stay safe from QR code scams:</p>
-    <ul>
-      <li><strong>Inspect the QR Code:</strong> Look for signs of tampering, such as stickers placed over the original QR
-        code or poorly aligned codes.</li>
-      <li><strong>Verify the URL:</strong> When redirected, check the website address. It should match the official
-        website of the service you are using. Legitimate sites usually start with "https://".</li>
-      <li><strong>Use Official Apps:</strong> Instead of scanning QR codes, use the official mobile apps provided by the
-        parking or payment service.</li>
-      <li><strong>Avoid Unnecessary Data Entry:</strong> Be cautious of websites that request more information than
-        necessary, such as your full address or bank details.</li>
-      <li><strong>Monitor Your Statements:</strong> Regularly check your bank and credit card statements for
-        unauthorised transactions.</li>
-    </ul>
-
-    <h2>What to Do if You’ve Been Scammed</h2>
-    <p>If you suspect fraud, immediately:</p>
-    <ul>
-      <li>Contact your bank to block your card and report the fraud.</li>
-      <li>File a report with <a href="https://www.actionfraud.police.uk/" target="_blank">Action Fraud</a>.</li>
-      <li>Monitor your bank statements for unauthorised transactions.</li>
-    </ul>
   </main>
   <footer>
     <p>© 2024 QR Code Scam Awareness | Stay Safe Online</p>

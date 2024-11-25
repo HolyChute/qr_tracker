@@ -22,7 +22,7 @@
 
     header h1 {
       margin: 0;
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
 
     header p {
@@ -30,10 +30,21 @@
       font-size: 1.2rem;
     }
 
+    .visitor-counter {
+      background-color: #ffedcc;
+      padding: 20px;
+      margin: 20px auto;
+      text-align: center;
+      font-size: 1.5rem;
+      border-radius: 10px;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
     main {
       padding: 20px;
       max-width: 800px;
-      margin: 20px auto;
+      margin: 0 auto;
       background: white;
       border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -47,13 +58,8 @@
       line-height: 1.6;
     }
 
-    .visitor-counter {
-      background-color: #ffedcc;
-      padding: 10px;
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-      border-radius: 5px;
+    ul {
+      padding-left: 20px;
     }
 
     footer {
@@ -68,71 +74,79 @@
   </style>
 
   <!-- Firebase SDKs -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-  import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCR54aO20Kk8nzdA3l5veWX2mLqE_Q2-zA",
-    authDomain: "qr-tracker-3b28f.firebaseapp.com",
-    databaseURL: "https://qr-tracker-3b28f-default-rtdb.firebaseio.com",
-    projectId: "qr-tracker-3b28f",
-    storageBucket: "qr-tracker-3b28f.appspot.com",
-    messagingSenderId: "918310687292",
-    appId: "1:918310687292:web:abdc00e552c7cb20516939",
-    measurementId: "G-MHXFRQCP60"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyCR54aO20Kk8nzdA3l5veWX2mLqE_Q2-zA",
+      authDomain: "qr-tracker-3b28f.firebaseapp.com",
+      databaseURL: "https://qr-tracker-3b28f-default-rtdb.firebaseio.com",
+      projectId: "qr-tracker-3b28f",
+      storageBucket: "qr-tracker-3b28f.appspot.com",
+      messagingSenderId: "918310687292",
+      appId: "1:918310687292:web:abdc00e552c7cb20516939",
+      measurementId: "G-MHXFRQCP60"
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
 
-  // Visitor Counter Logic
-  const visitorRef = ref(database, 'visitorCount');
-  
-  // Increment visitor count
-  runTransaction(visitorRef, (currentCount) => {
-    return (currentCount || 0) + 1;
-  });
+    // Visitor Counter Logic
+    const visitorRef = ref(database, 'visitorCount');
+    
+    // Increment visitor count
+    runTransaction(visitorRef, (currentCount) => {
+      return (currentCount || 0) + 1;
+    });
 
-  // Display visitor count
-  onValue(visitorRef, (snapshot) => {
-    const visitorCount = snapshot.val() || 0;
-    document.getElementById('visitorCount').textContent = 
-      `You're one of ${visitorCount} visitors who've taken the first step to stay safe from QR code scams!`;
-  });
-</script>
+    // Display visitor count
+    onValue(visitorRef, (snapshot) => {
+      const visitorCount = snapshot.val() || 0;
+      document.getElementById('visitorCount').textContent = 
+        `You're one of ${visitorCount} visitors who've taken the first step to stay safe from QR code scams!`;
+    });
+  </script>
 </head>
 
 <body>
   <header>
-    <h1>Warning: Untrusted QR Code Detected</h1>
-    <p>You may have scanned a fraudulent QR code. Stay safe and read below for guidance.</p>
+    <h1>QR Code Scam Awareness</h1>
+    <p>Stay informed and protect yourself from fraudulent QR codes.</p>
   </header>
-  <main>
-    <div class="visitor-counter">
-  <p id="visitorCount">Loading...</p>
-</div>
+  
+  <div class="visitor-counter">
+    <p id="visitorCount">Loading...</p>
+  </div>
 
+  <main>
     <h2>What Are QR Code Scams?</h2>
     <p>QR code scams involve the use of fake QR codes to deceive people into visiting fraudulent websites or downloading
       malicious content. Scammers often place counterfeit QR codes on parking meters, signs, or other public locations to
       trick unsuspecting users. When scanned, these codes redirect users to fake websites that mimic legitimate services,
       such as parking payment portals or online stores.</p>
     <p>These fraudulent sites are designed to steal personal and financial information, such as credit card details or
-      login credentials. In some cases, scanning a malicious QR code may even download harmful software onto your device.
-    </p>
+      login credentials. In some cases, scanning a malicious QR code may even download harmful software onto your device.</p>
     <p>Rest assured, you are safe here. This page is for educational purposes only and aims to help you recognise and avoid
       real QR code scams in the future.</p>
 
-    <h2>Financial Impact of QR Code Scams</h2>
-    <p>Recent data shows a growing trend in QR code-related scams:</p>
+    <h2>How to Protect Yourself</h2>
     <ul>
-      <li><strong>400+ cases:</strong> Reported in the UK in 2023 alone.</li>
-      <li><strong>£485.2 million:</strong> Lost to authorised push payment (APP) fraud in 2022, highlighting the
-        severity of financial scams.</li>
+      <li><strong>Inspect the QR Code:</strong> Look for signs of tampering, such as stickers placed over the original QR code.</li>
+      <li><strong>Verify the URL:</strong> Ensure the URL matches the official website of the service.</li>
+      <li><strong>Use Official Apps:</strong> Rely on official apps instead of scanning QR codes.</li>
+      <li><strong>Be Wary of Personal Information Requests:</strong> Avoid entering sensitive information unnecessarily.</li>
     </ul>
-    <p>These scams are increasingly targeting parking and payment systems, making vigilance essential.</p>
+
+    <h2>What to Do if You’ve Been Scammed</h2>
+    <p>If you suspect fraud, immediately:</p>
+    <ul>
+      <li>Contact your bank to block your card and report the fraud.</li>
+      <li>File a report with <a href="https://www.actionfraud.police.uk/" target="_blank">Action Fraud</a>.</li>
+      <li>Monitor your bank statements for unauthorised transactions.</li>
+    </ul>
   </main>
+
   <footer>
     <p>© 2024 QR Code Scam Awareness | Stay Safe Online</p>
   </footer>

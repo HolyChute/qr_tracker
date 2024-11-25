@@ -98,27 +98,31 @@
 
     // Query the Analytics API (updated for GA4)
     async function queryVisitorCount() {
-      try {
-        const response = await gapi.client.analyticsdata.properties.runReport({
-          property: 'properties/468656363', // Replace with your GA4 property ID
-          resource: {
-            dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
-            metrics: [{ name: 'screenPageViews' }],
-            dimensions: [{ name: 'pageTitle' }] // Added pageTitle dimension
-          }
-        });
-
-        // Find the row with the matching page title
-        const matchingRow = response.result.rows.find(row => row.dimensionValues[0].value === 'QR Code Scam Awareness'); 
-
-        const visitorCount = matchingRow?.metricValues[0]?.value || '0';
-        document.getElementById('visitorCount').textContent = visitorCount;
-
-      } catch (error) {
-        console.error("Error fetching visitor count:", error);
-        document.getElementById('visitorCount').textContent = "Error";
+  try {
+    const response = await gapi.client.analyticsdata.runReport({
+      property: 'properties/468656363', // Replace with your actual GA4 property ID
+      requestBody: {
+        dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
+        metrics: [{ name: 'screenPageViews' }], // Metric for GA4
+        dimensions: [{ name: 'pagePath' }] // Dimension for GA4
       }
-    }
+    });
+
+    // Extract visitor count from the response
+    const rows = response.result.rows || [];
+    let totalViews = 0;
+
+    rows.forEach(row => {
+      totalViews += parseInt(row.metricValues[0].value, 10); // Sum up page views
+    });
+
+    document.getElementById('visitorCount').textContent = totalViews || '0';
+
+  } catch (error) {
+    console.error("Error fetching visitor count:", error);
+    document.getElementById('visitorCount').textContent = "Error";
+  }
+}
 
     // Load the GAPI library
     gapi.load('client', loadGAPI);
